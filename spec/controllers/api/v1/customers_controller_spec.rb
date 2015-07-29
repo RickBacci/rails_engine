@@ -19,8 +19,6 @@ RSpec.describe Api::V1::CustomersController, type: :controller do
         duplicate_customers += 1 if c1 == c2
       end
 
-
-
       expect(duplicate_customers).to be < 10
       expect(response).to have_http_status(:success)
     end
