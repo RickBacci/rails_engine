@@ -1,7 +1,6 @@
 class Api::V1::CustomersController < ApplicationController
   respond_to :json
 
-
   def random
     respond_with Customer.all.sample
   end
