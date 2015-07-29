@@ -39,6 +39,7 @@ RSpec.describe Api::V1::MerchantsController, type: :controller do
   describe "GET #find" do
     it "finds a merchant with a query param" do
       merchant = Merchant.create!(name: 'acme2')
+
       get :find,  id: merchant.id, format: :json
 
       expect(JSON.parse(response.body)['name']).to eq('acme2')
