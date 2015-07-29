@@ -2,6 +2,60 @@ Rails.application.routes.draw do
 
   namespace :api do
   namespace :v1 do
+    get 'invoices/random'
+    end
+  end
+
+  namespace :api do
+  namespace :v1 do
+    get 'invoices/show'
+    end
+  end
+
+  namespace :api do
+  namespace :v1 do
+    get 'invoices/find'
+    end
+  end
+
+  namespace :api do
+  namespace :v1 do
+    get 'invoices/find_all'
+    end
+  end
+
+  namespace :api do
+  namespace :v1 do
+    get 'invoices/transactions'
+    end
+  end
+
+  namespace :api do
+  namespace :v1 do
+    get 'invoices/invoice_items'
+    end
+  end
+
+  namespace :api do
+  namespace :v1 do
+    get 'invoices/items'
+    end
+  end
+
+  namespace :api do
+  namespace :v1 do
+    get 'invoices/customer'
+    end
+  end
+
+  namespace :api do
+  namespace :v1 do
+    get 'invoices/merchant'
+    end
+  end
+
+  namespace :api do
+  namespace :v1 do
     get 'customers/random'
     end
   end
