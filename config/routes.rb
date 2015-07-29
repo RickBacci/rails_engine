@@ -1,96 +1,6 @@
 Rails.application.routes.draw do
 
   namespace :api do
-  namespace :v1 do
-    get 'invoice_items/random'
-    end
-  end
-
-  namespace :api do
-  namespace :v1 do
-    get 'invoice_items/show'
-    end
-  end
-
-  namespace :api do
-  namespace :v1 do
-    get 'invoice_items/find'
-    end
-  end
-
-  namespace :api do
-  namespace :v1 do
-    get 'invoice_items/find_all'
-    end
-  end
-
-  namespace :api do
-  namespace :v1 do
-    get 'invoice_items/invoice'
-    end
-  end
-
-  namespace :api do
-  namespace :v1 do
-    get 'invoice_items/item'
-    end
-  end
-
-  namespace :api do
-  namespace :v1 do
-    get 'items/random'
-    end
-  end
-
-  namespace :api do
-  namespace :v1 do
-    get 'items/show'
-    end
-  end
-
-  namespace :api do
-  namespace :v1 do
-    get 'items/find'
-    end
-  end
-
-  namespace :api do
-  namespace :v1 do
-    get 'items/find_all'
-    end
-  end
-
-  namespace :api do
-  namespace :v1 do
-    get 'items/invoice_items'
-    end
-  end
-
-  namespace :api do
-  namespace :v1 do
-    get 'items/merchant'
-    end
-  end
-
-  namespace :api do
-  namespace :v1 do
-    get 'items/most_revenue'
-    end
-  end
-
-  namespace :api do
-  namespace :v1 do
-    get 'items/most_items'
-    end
-  end
-
-  namespace :api do
-  namespace :v1 do
-    get 'items/best_day'
-    end
-  end
-
-  namespace :api do
     namespace :v1, defaults: { format: :json } do
 
 
@@ -104,8 +14,40 @@ Rails.application.routes.draw do
       end
 
 
-      get '/merchants/:id/items', to: 'merchants#items'
-      get '/merchants/:id/invoices', to: 'merchants#invoices'
+      get '/merchants/:id/items',        to: 'merchants#items'
+      get '/merchants/:id/invoices',     to: 'merchants#invoices'
+
+      get '/invoices/:id/transactions',  to: 'invoices#transactions'
+      get '/invoices/:id/invoice_items', to: 'invoices#invoice_items'
+      get '/invoices/:id/items',         to: 'invoices#items'
+      get '/invoices/:id/customer',      to: 'invoices#customer'
+      get '/invoices/:id/merchant',      to: 'invoices#merchant'
+
+      get '/invoice_items/:id/invoice',  to: 'invoice_items#invoice'
+      get '/invoice_items/:id/item',     to: 'invoice_items#item'
+
+      get '/items/:id/invoice_items',    to: 'items#invoice_items'
+      get '/items/:id/merchant',         to: 'items#merchant'
+
+      get '/transactions/:id/invoice',   to: 'transactions#invoice'
+
+      get '/customers/:id/invoices',     to: 'customers#invoices'
+      get '/customes/:id/transactions',  to: 'customers#transactions'
+
+      get '/merchants/most_revenue?quantity=x', to: 'merchants#most_revenue'
+      get '/merchants/most_items?quantity=x',   to: 'merchants#most_items'
+      get '/merchants/revenue?date=x',          to: 'merchants#revenue'
+
+      get '/merchants/:id/revenue',              to: 'merchants#total_revenue'
+      get '/merchants/:id/revenue?date=x', to: 'merchants#invoice#revenue'
+      get '/merchants/:id/favorite_customer', to: 'merchants#favorite_customer'
+      get '/merchants/:id/pending_invoices', to: 'merchants#pending_invoices'
+
+      get '/items/most_revenue?quantity=x', to: 'items#most_revenue'
+      get '/items/most_items?quantity=x', to: 'items#most_items'
+      get '/items/:id/best_day', to: 'items#best_day'
+
+      get '/customers/:id/favorite_merchant', to: 'customers#favorite_merchant'
 
     end
   end
