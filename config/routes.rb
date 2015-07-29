@@ -1,24 +1,63 @@
 Rails.application.routes.draw do
 
   namespace :api do
+  namespace :v1 do
+    get 'customers/random'
+    end
+  end
+
+  namespace :api do
+  namespace :v1 do
+    get 'customers/show'
+    end
+  end
+
+  namespace :api do
+  namespace :v1 do
+    get 'customers/find'
+    end
+  end
+
+  namespace :api do
+  namespace :v1 do
+    get 'customers/find_all'
+    end
+  end
+
+  namespace :api do
+  namespace :v1 do
+    get 'customers/invoices'
+    end
+  end
+
+  namespace :api do
+  namespace :v1 do
+    get 'customers/transactions'
+    end
+  end
+
+  namespace :api do
+  namespace :v1 do
+    get 'customers/favorite_merchant'
+    end
+  end
+
+  namespace :api do
     namespace :v1, defaults: { format: :json } do
 
-      # For your merchants, invoices, items, invoice_items, and customers
-
-      # GET api/v1/merchants/random.json
-      # GET /api/v1/merchants/1.json
-      # GET /api/v1/merchants/find?id=12
-      # GET /api/v1/merchants/find?name=Schroeder-Jerde
-      # GET /api/v1/merchants/find_all?name=Cummings-Thiel
 
       objects = [:merchants, :invoices, :items, :invoice_items, :customers]
 
-      #objects.each do
-      get '/merchants/random',   to: 'merchants#random'
-      get '/merchants/:id',      to: 'merchants#show'
-      get '/merchants/find_all', to: 'merchants#find_all'
-      get '/merchants/find',     to: 'merchants#find'
+      objects.each do |object|
+        get "/#{object}/random",   to: "#{object}#random"
+        get "/#{object}/:id",      to: "#{object}#show"
+        get "/#{object}/find_all", to: "#{object}#find_all"
+        get "/#{object}/find",     to: "#{object}#find"
+      end
 
+
+      get '/merchants/:id/items', to: 'merchants#items'
+      get '/merchants/:id/invoices', to: 'merchants#invoices'
 
     end
   end
