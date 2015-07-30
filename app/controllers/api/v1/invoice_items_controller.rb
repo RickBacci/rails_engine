@@ -22,13 +22,11 @@ class Api::V1::InvoiceItemsController < ApplicationController
   end
 
   def invoice
-    invoice_item = InvoiceItem.find(params[:id])
-    respond_with Invoice.where(invoice_item.invoice_id).first
-  end
+    respond_with InvoiceItem.find(params[:id]).invoice
+ end
 
   def item
-    invoice_item = InvoiceItem.find(params[:id])
-    respond_with Item.where(invoice_item.item_id).first
+    InvoiceItem.find(params[:id]).item
   end
 
   private

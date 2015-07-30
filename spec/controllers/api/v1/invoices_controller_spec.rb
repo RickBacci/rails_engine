@@ -35,7 +35,7 @@ RSpec.describe Api::V1::InvoicesController, type: :controller do
   end
 
   describe "GET #find" do
-    it "returns a customer with a query param" do
+    it "returns an invoice with a query param" do
       invoice = Invoice.create!(status: 'shipped')
 
       get :find, id: invoice.id, format: :json
@@ -46,43 +46,65 @@ RSpec.describe Api::V1::InvoicesController, type: :controller do
   end
 
   describe "GET #find_all" do
-    xit "returns http success" do
-      get :find_all
+    it "returns all invoies with that attribute" do
+       Invoice.create!(status: 'shipped')
+       Invoice.create!(status: 'shipped')
+       Invoice.create!(status: 'shipped')
+
+      get :find_all, status: 'shipped', format: :json
+
+      expect(JSON.parse(response.body).size).to eq(3)
       expect(response).to have_http_status(:success)
     end
   end
 
   describe "GET #transactions" do
-    xit "returns http success" do
-      get :transactions
+    it "returns the invoices transactions" do
+      invoice = Invoice.create!(status: 'shipped')
+
+      get :transactions, id: invoice.id, format: :json
+
       expect(response).to have_http_status(:success)
     end
   end
 
   describe "GET #invoice_items" do
-   xit "returns http success" do
-      get :invoice_items
+   it "returns the invoices invoice_items" do
+      invoice = Invoice.create!(status: 'shipped')
+
+      get :invoice_items, id: invoice.id, format: :json
+
       expect(response).to have_http_status(:success)
     end
   end
 
   describe "GET #items" do
-    xit "returns http success" do
-      get :items
+    it "returns the invoices items" do
+      invoice = Invoice.create!(status: 'shipped')
+
+      get :items, id: invoice.id, format: :json
+
       expect(response).to have_http_status(:success)
     end
   end
 
   describe "GET #customer" do
-    xit "returns http success" do
-      get :customer
+    it "returns the customer for the invoice" do
+      invoice = Invoice.create!(status: 'shipped')
+
+      get :customer, id: invoice.id, format: :json
+
       expect(response).to have_http_status(:success)
     end
   end
 
   describe "GET #merchant" do
-    xit "returns http success" do
-      get :merchant
+    it "returns the invoices merchant" do
+      merchant = Merchant.create(name: 'testy')
+      invoice = Invoice.create!(status: 'shipped', merchant_id: merchant.id)
+
+      get :merchant, id: invoice.id, format: :json
+
       expect(response).to have_http_status(:success)
     end
   end

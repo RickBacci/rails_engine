@@ -30,7 +30,7 @@ RSpec.describe Api::V1::CustomersController, type: :controller do
 
       get :show, id: customer.id, format: :json
 
-      expect(JSON.parse(response.body)['first_name']).to eq('Ricky')
+      expect(JSON.parse(response.body)['first_name']).to eq('ricky')
       expect(response).to have_http_status(:success)
     end
   end
@@ -41,19 +41,19 @@ RSpec.describe Api::V1::CustomersController, type: :controller do
 
       get :find, id: customer.id, format: :json
 
-      expect(JSON.parse(response.body)['last_name']).to eq('B')
+      expect(JSON.parse(response.body)['last_name']).to eq('b')
       expect(response).to have_http_status(:success)
     end
   end
 
   describe "GET #find_all" do
-    xit "returns all customers with the same attribute" do
+    it "returns all customers with the same attribute" do
 
       Customer.create!(first_name: 'Ricky', last_name: 'B')
       Customer.create!(first_name: 'Ricky', last_name: 'B')
       Customer.create!(first_name: 'ricky', last_name: 'b')
 
-      get :find_all, first_name: 'Ricky', case_sensitive: false, format: :json
+      get :find_all, first_name: 'ricky', format: :json
 
 
       expect(JSON.parse(response.body).size).to eq(3)
@@ -62,24 +62,23 @@ RSpec.describe Api::V1::CustomersController, type: :controller do
   end
 
   describe "GET #invoices" do
-    xit "returns http success" do
-      get :invoices
+    it "returns http success" do
+      customer = Customer.create!(first_name: 'Ricky', last_name: 'B')
+      customer.invoices.create!(status: 'shipped')
+      customer.invoices.create!(status: 'shipped')
+      customer.invoices.create!(status: 'shipped')
+
+      get :invoices, id: customer.id, format: :json
+
       expect(response).to have_http_status(:success)
     end
   end
 
   describe "GET #transactions" do
-    xit "returns http success" do
-      get :transactions
+    it "returns http success" do
+      customer = Customer.create!(first_name: 'Ricky', last_name: 'B')
+      get :transactions, id: customer.id, format: :json
       expect(response).to have_http_status(:success)
     end
   end
-
-  describe "GET #favorite_merchant" do
-    xit "returns http success" do
-      get :favorite_merchant
-      expect(response).to have_http_status(:success)
-    end
-  end
-
 end

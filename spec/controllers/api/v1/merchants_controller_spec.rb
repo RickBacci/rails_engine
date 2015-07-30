@@ -48,7 +48,7 @@ RSpec.describe Api::V1::MerchantsController, type: :controller do
   end
 
   describe "GET #find_all" do
-    xit "returns all merchants with the same attribute" do
+    it "returns all merchants with the same attribute" do
 
         Merchant.create(name: "merchant1")
         Merchant.create(name: "Merchant1")

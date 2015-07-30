@@ -40,29 +40,51 @@ RSpec.describe Api::V1::InvoiceItemsController, type: :controller do
       invoice_item = InvoiceItem.create!(quantity: 5, unit_price: 1.00)
 
       get :find, id: invoice_item.id, format: :json
+
       expect(response).to have_http_status(:success)
     end
   end
 
   describe "GET #find_all" do
-    it "returns http success" do
-      get :find_all
+    it "returns invoice items with the same attributes" do
+
+      InvoiceItem.create(quantity: 3, unit_price: 7)
+      InvoiceItem.create(quantity: 5, unit_price: 7)
+      InvoiceItem.create(quantity: 5, unit_price: 5)
+
+
+      get :find_all, quantity: 5, format: :json
+
+      expect(JSON.parse(response.body).size).to eq(2)
       expect(response).to have_http_status(:success)
     end
   end
 
   describe "GET #invoice" do
-    it "returns http success" do
-      get :invoice
+    it "returns the Invoice_items invoice" do
+      invoice = Invoice.create!(status: 'shipped')
+      invoice.invoice_items.create!(quantity: 5, unit_price: 1.00)
+      invoice.invoice_items.create!(quantity: 5, unit_price: 1.00)
+      invoice_item = invoice.invoice_items.first
+
+      get :invoice, id: invoice_item.id, format: :json
+
       expect(response).to have_http_status(:success)
     end
   end
 
   describe "GET #item" do
-    it "returns http success" do
-      get :item
+    it "returns the invoice_items item" do
+      item = Item.create!(name: 'item', description: 'item description',
+                          unit_price: 2.00)
+      invoice = Invoice.create(status: 'shipped')
+
+      invoice_item = InvoiceItem.create(quantity: 1, unit_price: 1.00, item_id: item.id)
+
+      get :item, id: invoice_item.id, format: :json
+
       expect(response).to have_http_status(:success)
     end
   end
-
 end
+

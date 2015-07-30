@@ -14,7 +14,7 @@ class Api::V1::InvoicesController < ApplicationController
   end
 
   def find
-    respond_with Invoice.find_by(find_params).first
+    respond_with Invoice.where(find_params).first
   end
 
   def find_all
@@ -22,23 +22,23 @@ class Api::V1::InvoicesController < ApplicationController
   end
 
   def transactions
-    respond_with Invoice.transactions
+    respond_with Invoice.find(params[:id]).transactions
   end
 
   def invoice_items
-    respond_with Invoice.invoice_items
+    respond_with Invoice.find(params[:id]).invoice_items
   end
 
   def items
-    respond_with Invoice.items
+    respond_with Invoice.find(params[:id]).items
   end
 
   def customer
-    respond_with Invoice.customer
+    respond_with Invoice.find(params[:id]).customer
   end
 
   def merchant
-    respond_with Invoice.customer
+    respond_with Invoice.find(params[:id]).merchant
   end
 
   private

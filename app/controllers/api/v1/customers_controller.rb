@@ -1,4 +1,6 @@
 class Api::V1::CustomersController < ApplicationController
+#  before_action :downcase_names, only: [:find_all]
+
   respond_to :json
 
   def index
@@ -22,7 +24,7 @@ class Api::V1::CustomersController < ApplicationController
   end
 
   def invoices
-    respond_with Invoice.all.where(customer_id: params[:id])
+    respond_with Invoice.where(customer_id: params[:id]).all
   end
 
   def transactions
@@ -30,7 +32,6 @@ class Api::V1::CustomersController < ApplicationController
   end
 
   def favorite_merchant
-    respond_with customer.merchants
   end
 
   private
@@ -39,5 +40,10 @@ class Api::V1::CustomersController < ApplicationController
     params.permit(:id, :first_name,
                   :last_name, :full_name,
                   :created_at, :updated_at)
+  end
+
+  def downcase_names
+    params[:first_name].downcase! if params[:first_name]
+    params[:last_name].downcase! if params[:last_name]
   end
 end
