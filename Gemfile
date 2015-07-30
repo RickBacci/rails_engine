@@ -28,6 +28,7 @@ group :development, :test do
   gem 'better_errors'
   gem 'binding_of_caller'
   gem 'rspec-rails', '~> 3.0'
+  gem 'simplecov', '~> 0.10.0'
 end
 
 group :development do
