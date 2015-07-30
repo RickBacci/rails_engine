@@ -51,12 +51,12 @@ RSpec.describe Api::V1::MerchantsController, type: :controller do
     it "returns all merchants with the same attribute" do
 
         Merchant.create(name: "merchant1")
-        Merchant.create(name: "Merchant1")
+        Merchant.create(name: "merchant1")
         Merchant.create(name: "Not_Merchant1")
 
       get :find_all, name: 'merchant1', format: :json
 
-      expect(JSON.parse(response.body).size).to eq(1)
+      expect(JSON.parse(response.body).size).to eq(2)
       expect(response).to have_http_status(:success)
     end
   end

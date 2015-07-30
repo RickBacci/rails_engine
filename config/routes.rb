@@ -49,6 +49,8 @@ Rails.application.routes.draw do
       get '/items/:id/best_day', to: 'items#best_day'
 
       get '/customers/:id/favorite_merchant', to: 'customers#favorite_merchant'
+
+      get '/transactions', to: 'transactions#index'
     end
   end
 end

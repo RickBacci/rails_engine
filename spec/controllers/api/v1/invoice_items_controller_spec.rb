@@ -74,12 +74,12 @@ RSpec.describe Api::V1::InvoiceItemsController, type: :controller do
   end
 
   describe "GET #item" do
-    xit "returns the invoice_items item" do
+    it "returns the invoice_items item" do
       item = Item.create!(name: 'item', description: 'item description',
                           unit_price: 2.00)
       invoice = Invoice.create(status: 'shipped')
 
-      invoice_item = InvoiceItem.create(quantity: 1, unit_price: 1.00, item_id: item.id)
+      invoice_item = InvoiceItem.create(quantity: 1, unit_price: 1.00, item_id: item.id, invoice_id: invoice.id)
 
       get :item, id: invoice_item.id, format: :json
 

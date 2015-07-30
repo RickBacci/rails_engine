@@ -1,5 +1,5 @@
 class Api::V1::MerchantsController < ApplicationController
-  before_action :downcase_names, only: [:find_all]
+#  before_action :downcase_names, only: [:find_all]
   respond_to :json
 
   def index
@@ -24,8 +24,7 @@ class Api::V1::MerchantsController < ApplicationController
   end
 
   def items
-    merchant_items = Merchant.find(params[:id]).items
-    respond_with merchant_items.map { |item| item.id }.to_json
+    Merchant.find(params[:id]).items
   end
 
   def invoices
