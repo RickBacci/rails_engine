@@ -10,7 +10,6 @@ class Api::V1::MerchantsController < ApplicationController
     respond_with Merchant.all.sample
   end
 
-
   def show
     respond_with Merchant.find(params[:id])
   end
@@ -31,7 +30,12 @@ class Api::V1::MerchantsController < ApplicationController
     respond_with Merchant.find(params[:id]).invoices
   end
 
+  def revenue
+    respond_with Merchant.find(params[:id]).total_revenue
+  end
+
   private
+
   def find_params
     params.permit(:id, :name, :created_at, :updated_at)
   end
