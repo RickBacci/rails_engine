@@ -54,4 +54,10 @@ RSpec.describe InvoiceItem, type: :model do
       expect(invoice_item.item.is_a? Item)
     end
   end
+
+  context 'Total' do
+    it 'can be calculated' do
+      expect(invoice_item.line_total).to eq(1)
+    end
+  end
 end

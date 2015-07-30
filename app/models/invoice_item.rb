@@ -4,4 +4,8 @@ class InvoiceItem < ActiveRecord::Base
 
   validates :quantity, presence: true
   validates :unit_price, presence: true
+
+  def line_total
+    quantity * unit_price
+  end
 end

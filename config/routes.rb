@@ -39,7 +39,7 @@ Rails.application.routes.draw do
       get '/merchants/most_items?quantity=x',   to: 'merchants#most_items'
       get '/merchants/revenue?date=x',          to: 'merchants#revenue'
 
-      get '/merchants/:id/revenue',              to: 'merchants#total_revenue'
+      get '/merchants/:id/revenue',             to: 'merchants#revenue'
       get '/merchants/:id/revenue?date=x', to: 'merchants#invoice#revenue'
       get '/merchants/:id/favorite_customer', to: 'merchants#favorite_customer'
       get '/merchants/:id/pending_invoices', to: 'merchants#pending_invoices'
