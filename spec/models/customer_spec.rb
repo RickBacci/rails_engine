@@ -47,7 +47,6 @@ RSpec.describe Customer, type: :model do
       invoice
       customer.invoices.first.transactions.create!(
         credit_card_number: '1111222233334444',
-        credit_card_expiration_date: '',
         result: 'success')
 
       expect(customer.transactions.size).to eq(1)
