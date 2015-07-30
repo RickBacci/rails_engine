@@ -24,7 +24,7 @@ class Api::V1::MerchantsController < ApplicationController
   end
 
   def items
-    Merchant.find(params[:id]).items
+   respond_with Merchant.find(params[:id]).items
   end
 
   def invoices

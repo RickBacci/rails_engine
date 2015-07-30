@@ -9,8 +9,8 @@ class Customer < ActiveRecord::Base
 
   private
 
-  def downcase_names
-    self.first_name = self.first_name.downcase
-    self.last_name = self.last_name.downcase
-  end
+  # def downcase_names
+  #   self.first_name = self.first_name.downcase
+  #   self.last_name = self.last_name.downcase
+  # end
 end
