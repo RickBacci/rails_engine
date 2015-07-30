@@ -1,6 +1,10 @@
 class Api::V1::CustomersController < ApplicationController
   respond_to :json
 
+  def index
+    respond_with Customer.all
+  end
+
   def random
     respond_with Customer.all.sample
   end
@@ -10,14 +14,11 @@ class Api::V1::CustomersController < ApplicationController
   end
 
   def find
-    respond_with Customer.find_by(find_params)
+    respond_with Customer.where(find_params).first
   end
 
   def find_all
-    params[:first_name].downcase! if params[:first_name]
-    params[:last_name].downcase! if params[:last_name]
-    # respond_with Customer.where("lower(params[:first_name]) =?", params[:first_name].downcase).first
-    respond_with Customer.all.where(find_params)
+    respond_with Customer.where(find_params).all
   end
 
   def invoices
@@ -25,8 +26,7 @@ class Api::V1::CustomersController < ApplicationController
   end
 
   def transactions
-    customer = Customer.find(params[:id])
-    respond_with customer.invoices.transactions.where(result: 'success')
+    respond_with Customer.find(params[:id]).transactions
   end
 
   def favorite_merchant
@@ -35,7 +35,9 @@ class Api::V1::CustomersController < ApplicationController
 
   private
 
-    def find_params
-      params.permit(:first_name, :last_name)
-    end
+  def find_params
+    params.permit(:id, :first_name,
+                  :last_name, :full_name,
+                  :created_at, :updated_at)
+  end
 end

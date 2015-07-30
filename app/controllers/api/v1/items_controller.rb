@@ -1,6 +1,10 @@
 class Api::V1::ItemsController < ApplicationController
   respond_to :json
 
+  def index
+    respond_with Item.all
+  end
+
   def random
     respond_with Item.all.sample
   end
@@ -10,17 +14,19 @@ class Api::V1::ItemsController < ApplicationController
   end
 
   def find
-    respond_with Item.find_by(find_params)
+    respond_with Item.where(find_params).first
   end
 
   def find_all
-    respond_with Item.all.where(find_params)
+    respond_with Item.where(find_params).all
   end
 
   def invoice_items
+    respond_with Item.invoice_items
   end
 
   def merchant
+    respond_with Item.merchant
   end
 
   def most_revenue
@@ -36,6 +42,7 @@ class Api::V1::ItemsController < ApplicationController
   private
 
   def find_params
-    params.permit(:name, :description, :unit_price)
+    params.permit(:id, :name, :description, :unit_price,
+                  :merchant_id, :created_at, :updated_at)
   end
 end

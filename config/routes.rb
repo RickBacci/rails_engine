@@ -4,13 +4,14 @@ Rails.application.routes.draw do
     namespace :v1, defaults: { format: :json } do
 
 
-      objects = [:merchants, :invoices, :items, :invoice_items, :customers]
+      objects = ['merchants', 'invoices', 'items', 'invoice_items', 'customers']
 
       objects.each do |object|
-        get "/#{object}/random",   to: "#{object}#random"
-        get "/#{object}/:id",      to: "#{object}#show"
         get "/#{object}/find_all", to: "#{object}#find_all"
+        get "/#{object}/random",   to: "#{object}#random"
+        get "/#{object}/:id",      to: "#{object}#show", constraints: { id: /\d+/ }
         get "/#{object}/find",     to: "#{object}#find"
+        get "/#{object}",          to: "#{object}#index"
       end
 
 
@@ -32,7 +33,7 @@ Rails.application.routes.draw do
       get '/transactions/:id/invoice',   to: 'transactions#invoice'
 
       get '/customers/:id/invoices',     to: 'customers#invoices'
-      get '/customes/:id/transactions',  to: 'customers#transactions'
+      get '/customers/:id/transactions',  to: 'customers#transactions'
 
       get '/merchants/most_revenue?quantity=x', to: 'merchants#most_revenue'
       get '/merchants/most_items?quantity=x',   to: 'merchants#most_items'
@@ -48,7 +49,6 @@ Rails.application.routes.draw do
       get '/items/:id/best_day', to: 'items#best_day'
 
       get '/customers/:id/favorite_merchant', to: 'customers#favorite_merchant'
-
     end
   end
 end

@@ -1,6 +1,10 @@
 class Api::V1::MerchantsController < ApplicationController
   respond_to :json
 
+  def index
+    respond_with Merchant.all
+  end
+
   def random
     respond_with Merchant.all.sample
   end
@@ -11,11 +15,11 @@ class Api::V1::MerchantsController < ApplicationController
   end
 
   def find
-    respond_with Merchant.find_by(find_params)
+    respond_with Merchant.where(find_params).first
   end
 
   def find_all
-    respond_with Merchant.all.where(name: params['name'].downcase!)
+    respond_with Merchant.where(find_params).all
   end
 
   def items
@@ -24,15 +28,12 @@ class Api::V1::MerchantsController < ApplicationController
   end
 
   def invoices
-    merchant_invoices = Merchant.find(params[:id]).invoices
-    merchant_invoices = merchant_invoices.map { |invoice| invoice.id }
-
-    respond_with merchant_invoices.to_json
+    respond_with Merchant.find(params[:id]).invoices
   end
 
   private
     def find_params
-      params.permit(:id, :name)
+      params.permit(:id, :name, :created_at, :updated_at)
     end
 end
 
