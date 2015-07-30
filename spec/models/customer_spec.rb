@@ -31,7 +31,7 @@ RSpec.describe Customer, type: :model do
       expect(customer.invoices).to eq([])
     end
 
-    it 'can be added' do
+    it 'can be added after a purchase' do
       invoice
 
       expect(customer.invoices.size).to eq(1)
@@ -43,7 +43,7 @@ RSpec.describe Customer, type: :model do
       expect(customer.transactions).to eq([])
     end
 
-    it 'can be added' do
+    it 'can be added after a transaction' do
       invoice
       customer.invoices.first.transactions.create!(
         credit_card_number: '1111222233334444',
@@ -59,11 +59,11 @@ RSpec.describe Customer, type: :model do
       expect(customer.merchants).to eq([])
     end
 
-    it 'can be added' do
+    it 'can be added after a purchase' do
       invoice
       expect(customer.merchants.size).to eq(1)
       expect(customer).to respond_to(:merchants)
-      expect(customer.merchants.first.name).to eq('aaaAbletoCode')
+      expect(customer.merchants.first.name).to eq('aaaabletocode')
     end
   end
 end

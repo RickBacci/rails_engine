@@ -1,4 +1,5 @@
 class Api::V1::MerchantsController < ApplicationController
+  before_action :downcase_names, only: [:find_all]
   respond_to :json
 
   def index
@@ -32,8 +33,12 @@ class Api::V1::MerchantsController < ApplicationController
   end
 
   private
-    def find_params
-      params.permit(:id, :name, :created_at, :updated_at)
-    end
+  def find_params
+    params.permit(:id, :name, :created_at, :updated_at)
+  end
+
+  def downcase_names
+    params[:name].downcase!
+  end
 end
 

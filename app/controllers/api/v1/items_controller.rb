@@ -22,11 +22,11 @@ class Api::V1::ItemsController < ApplicationController
   end
 
   def invoice_items
-    respond_with Item.invoice_items
+    respond_with Item.find(params[:id]).invoice_items
   end
 
   def merchant
-    respond_with Item.merchant
+    respond_with Item.find(params[:id]).merchant
   end
 
   def most_revenue
