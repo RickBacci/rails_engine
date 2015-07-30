@@ -19,7 +19,8 @@ namespace :data_parser do
       file = "lib/assets/#{file}.csv"
 
       CSV.foreach(file, headers: true, header_converters: :symbol) do |row|
-        model.find_or_create_by(row.to_hash)
+        downcase_row(row)
+        model.create(row.to_hash)
       end
 
       puts "#{model.all.size} #{model} records imported successfully"
@@ -28,3 +29,8 @@ namespace :data_parser do
   end
 end
 
+def downcase_row(row)
+   row[:first_name].downcase! if row[:first_name]
+   row[:last_name].downcase!  if row[:last_name]
+   row[:name].downcase!       if row[:name]
+end
