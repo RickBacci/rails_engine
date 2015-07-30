@@ -2,6 +2,19 @@ require 'rails_helper'
 
 RSpec.describe Api::V1::InvoiceItemsController, type: :controller do
 
+  describe "Get #all" do
+    it "returns all records" do
+      5.times do |c|
+        InvoiceItem.create(quantity: c, unit_price: c)
+      end
+
+      get :index, format: :json
+
+      expect(JSON.parse(response.body).size).to eq(5)
+      expect(response).to have_http_status(:success)
+    end
+  end
+
   describe "GET #random" do
     it "returns a random InvoiceItem" do
       20.times do |i|

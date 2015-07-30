@@ -9,7 +9,7 @@ class Merchant < ActiveRecord::Base
 
   private
 
-  def downcase_names
-    self.name = self.name.downcase
-  end
+  # def downcase_names
+  #   self.name = self.name.downcase
+  # end
 end

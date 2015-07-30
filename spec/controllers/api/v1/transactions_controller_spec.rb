@@ -2,6 +2,19 @@ require 'rails_helper'
 
 RSpec.describe Api::V1::TransactionsController, type: :controller do
 
+  describe "Get #all" do
+    it "returns all records" do
+      5.times do |c|
+        Transaction.create(result: "success#{c}")
+      end
+
+      get :index, format: :json
+
+      expect(JSON.parse(response.body).size).to eq(5)
+      expect(response).to have_http_status(:success)
+    end
+  end
+
   describe "GET #random" do
     it "returns a random transaction" do
       20.times do |x|

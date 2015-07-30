@@ -36,8 +36,8 @@ class Api::V1::MerchantsController < ApplicationController
     params.permit(:id, :name, :created_at, :updated_at)
   end
 
-  def downcase_names
-    params[:name].downcase!
-  end
+  # def downcase_names
+  #   params[:name].downcase!
+  # end
 end
 
