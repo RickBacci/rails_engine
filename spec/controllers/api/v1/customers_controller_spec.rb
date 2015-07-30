@@ -30,7 +30,7 @@ RSpec.describe Api::V1::CustomersController, type: :controller do
 
       get :show, id: customer.id, format: :json
 
-      expect(JSON.parse(response.body)['first_name']).to eq('ricky')
+      expect(JSON.parse(response.body)['first_name']).to eq('Ricky')
       expect(response).to have_http_status(:success)
     end
   end
@@ -41,7 +41,7 @@ RSpec.describe Api::V1::CustomersController, type: :controller do
 
       get :find, id: customer.id, format: :json
 
-      expect(JSON.parse(response.body)['last_name']).to eq('b')
+      expect(JSON.parse(response.body)['last_name']).to eq('B')
       expect(response).to have_http_status(:success)
     end
   end
@@ -56,7 +56,7 @@ RSpec.describe Api::V1::CustomersController, type: :controller do
       get :find_all, first_name: 'ricky', format: :json
 
 
-      expect(JSON.parse(response.body).size).to eq(3)
+      expect(JSON.parse(response.body).size).to eq(1)
       expect(response).to have_http_status(:success)
     end
   end

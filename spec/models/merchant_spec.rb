@@ -56,7 +56,7 @@ RSpec.describe Merchant, type: :model do
                                  customer_id: customer.id)
 
       expect(merchant.customers.count).to eq(1)
-      expect(merchant.customers.first.first_name).to eq('ricky')
+      expect(merchant.customers.first.first_name).to eq('Ricky')
     end
   end
 end

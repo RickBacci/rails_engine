@@ -1,5 +1,5 @@
 class Merchant < ActiveRecord::Base
-  before_save :downcase_names
+#  before_save :downcase_names
 
   validates :name, presence: true
 

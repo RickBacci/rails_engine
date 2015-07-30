@@ -1,5 +1,5 @@
 class Customer < ActiveRecord::Base
-  before_save :downcase_names
+#  before_save :downcase_names
 
   validates :first_name, :last_name, presence: true
 

@@ -19,7 +19,7 @@ namespace :data_parser do
       file = "lib/assets/#{file}.csv"
 
       CSV.foreach(file, headers: true, header_converters: :symbol) do |row|
-        downcase_row(row)
+#        downcase_row(row)
         model.create(row.to_hash)
       end
 

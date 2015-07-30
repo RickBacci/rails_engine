@@ -56,7 +56,7 @@ RSpec.describe Api::V1::MerchantsController, type: :controller do
 
       get :find_all, name: 'merchant1', format: :json
 
-      expect(JSON.parse(response.body).size).to eq(2)
+      expect(JSON.parse(response.body).size).to eq(1)
       expect(response).to have_http_status(:success)
     end
   end
