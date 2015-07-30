@@ -52,7 +52,7 @@ RSpec.describe Api::V1::TransactionsController, type: :controller do
     it "finds a transaction with a query param" do
       transaction = Transaction.create!(result: 'success')
 
-      get :show, id: transaction.id, format: :json
+      get :find, id: transaction.id, format: :json
 
       expect(JSON.parse(response.body)['result']).to eq('success')
       expect(response).to have_http_status(:success)

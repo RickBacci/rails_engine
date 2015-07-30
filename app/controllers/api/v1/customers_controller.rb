@@ -42,8 +42,8 @@ class Api::V1::CustomersController < ApplicationController
                   :created_at, :updated_at)
   end
 
-  def downcase_names
-    params[:first_name].downcase! if params[:first_name]
-    params[:last_name].downcase! if params[:last_name]
-  end
+  # def downcase_names
+  #   params[:first_name].downcase! if params[:first_name]
+  #   params[:last_name].downcase! if params[:last_name]
+  # end
 end
