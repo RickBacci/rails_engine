@@ -14,7 +14,7 @@ class Api::V1::ItemsController < ApplicationController
   end
 
   def find
-    respond_with Item.where(find_params).first
+    respond_with Item.find_by(find_params)
   end
 
   def find_all

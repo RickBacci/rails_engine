@@ -14,7 +14,7 @@ class Api::V1::InvoicesController < ApplicationController
   end
 
   def find
-    respond_with Invoice.where(find_params).first
+    respond_with Invoice.find_by(find_params)
   end
 
   def find_all

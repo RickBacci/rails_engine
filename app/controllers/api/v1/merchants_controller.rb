@@ -16,7 +16,7 @@ class Api::V1::MerchantsController < ApplicationController
   end
 
   def find
-    respond_with Merchant.where(find_params).first
+    respond_with Merchant.find_by(find_params)
   end
 
   def find_all
